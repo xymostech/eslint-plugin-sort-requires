@@ -1,6 +1,8 @@
 ---
 env:
   mocha: true
+  node: true
 extends:
-  - kentor
-  - kentor/es6
+  eslint:recommended
+parserOptions:
+  ecmaVersion: 6
