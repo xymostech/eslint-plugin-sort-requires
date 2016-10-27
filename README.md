@@ -1,7 +1,5 @@
 # eslint-plugin-sort-requires
 
-[![Build Status](https://travis-ci.org/kentor/eslint-plugin-sort-requires.svg?branch=master)](https://travis-ci.org/kentor/eslint-plugin-sort-requires) [![npm](https://img.shields.io/npm/v/eslint-plugin-sort-requires.svg)](https://www.npmjs.com/package/eslint-plugin-sort-requires)
-
 ESLint rule to enforce sorting of variable declarations in a group of `require()` calls
 
 ## Installation
@@ -15,7 +13,7 @@ $ npm install eslint --save-dev
 Next, install `eslint-plugin-sort-requires`:
 
 ```
-$ npm install eslint-plugin-sort-requires --save-dev
+$ npm install eslint-plugin-sort-requires@xymostech/eslint-plugin-sort-requires --save-dev
 ```
 
 **Note:** If you installed ESLint globally (using the `-g` flag) then you must
@@ -52,16 +50,15 @@ Enforce alphabetically sorting of variable declarations in a group of
 between the end of one variable declaration node with a `require()` call the
 beginning of the next.
 
+This enforces that the value inside the require filename is sorted, not the
+variable or pattern that it is assigned to.
+
 #### Good
 ```js
+var {z} = require('a');
+var c = require('c');
+
 var a = require('a');
-var c = require('b');
-
-var b = require('b');
-
-// const comes before let
-const e = require('e');
-let d = require('d');
 ```
 
 #### Bad
@@ -69,26 +66,13 @@ let d = require('d');
 var b = require('b');
 var a = require('a');
 
-var d =
+var {a} =
   require('d');
 var c = require('c');
-
-// const comes before let
-let e = require('e');
-const f = require('f');
 ```
 
 See [tests/lib/rules/sort-requires.js](tests/lib/rules/sort-requires.js) for
 more cases.
-
-## jscodeshift codemod
-
-This project contains a [jscodeshift](https://github.com/facebook/jscodeshift)
-codemod for fixing `sort-requires` errors. With `jscodeshift` installed, run:
-
-```
-jscodeshift -t node_modules/eslint-plugin-sort-requires/lib/codemod.js <path>
-```
 
 ## License
 
